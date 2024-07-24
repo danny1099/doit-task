@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { globalFont } from '@/config/fonts'
 import "@/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+interface Props extends Children {
+  params: { lang: string }
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, params: { lang } }: Readonly<Props>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang={lang}>
+      <body className={`${globalFont.className} antialiased h-screen overflow-hidden`}>
+        {children}
+      </body>
     </html>
   );
 }
